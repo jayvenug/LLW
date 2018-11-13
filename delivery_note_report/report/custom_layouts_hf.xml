@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+    <data>
+
+    <template id="delivery_note_custom_external_layout">
+    	<!-- Multicompany -->
+        <t t-if="o and 'company_id' in o">
+            <t t-set="company" t-value="o.company_id"></t>
+        </t>
+        <t t-if="not o or not 'company_id' in o">
+            <t t-set="company" t-value="res_company"></t>
+        </t>
+
+        <t t-call="delivery_note_report.delivery_note_custom_layout_header" />
+        <div class="article o_report_layout_standard">
+            <t t-raw="0" />
+        </div>
+        <t t-call="delivery_note_report.delivery_note_custom_layout_footer" />
+    </template>
+
+    <template id="delivery_note_custom_layout_header">
+        <div class="header">
+        </div>
+    </template>
+
+    <template id="delivery_note_custom_layout_footer">
+        <div class="footer">
+    	</div>
+    </template>
+
+    </data>
+</odoo>
