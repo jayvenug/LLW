@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="utf-8"?>
+<odoo>
+	<data>
+	<!-- INHERITANCE OF STOCK PICKING -->
+	<record id="view_delivery_note_report" model="ir.ui.view">
+		<field name="name">stock.picking.view</field>
+		<field name="model">stock.picking</field>
+		<field name="inherit_id" ref="stock.view_picking_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='picking_type_id']" position="after">
+				<field name="picking_code"/>
+				
+			</xpath>
+			<xpath expr="//header" position="inside">
+				<button string="Print PDF" name="print_deliveryorder" type="object" class="btn-primary"/>
+				
+			</xpath>
+		</field>
+	</record>
+
+	<!--INHERITANCE OF ACCOUNT INVOICE-->
+	<record id="view_account_invoice_report" model="ir.ui.view">
+		<field name="name">account.invoice.view</field>
+		<field name="model">account.invoice</field>
+		<field name="inherit_id" ref="account.invoice_form"/>
+		<field name="arch" type="xml">
+			<xpath expr="//button[@name='action_invoice_open']" position="before">				
+				<button string="Print PDF" name="print_invoiceyorder" type="object" class="btn-primary"/>
+			</xpath>
+		</field>
+	</record>
+	
+	<!-- INHERITANCE OF PRODUCT -->
+	<record id="view_product_net_weight" model="ir.ui.view">
+		<field name="name">product.product.view</field>
+		<field name="model">product.product</field>
+		<field name="inherit_id" ref="product.product_normal_form_view"/>
+		<field name="arch" type="xml">
+			<xpath expr="//field[@name='tracking']" position="before">
+				<field name="net_weight"/>
+			</xpath>
+		</field>
+	</record>
+
+	<record id="product_template_only_form_view_inh" model="ir.ui.view">
+        <field name="name">product.template.product.form.inh</field>
+        <field name="model">product.template</field>
+        <field name="mode">primary</field>
+        <field name="priority" eval="6" />
+        <field name="inherit_id" ref="product.product_template_only_form_view"/>
+        <field name="arch" type="xml">
+            <field name="default_code" position="after">
+                <field name="custom_tarrif"/>
+            </field>
+        </field>
+    </record>
+</data>
+</odoo>
